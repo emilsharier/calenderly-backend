@@ -3,16 +3,14 @@ const bcrypt = require('bcrypt')
 const config = require('../config/jwt_config')
 // const mail = require('../controllers/mail_controller')
 
-const Client = require('../models/client')
-const Provider = require('../models/provider')
-const User = require('../models/user')
+const models = require('../models/models')
 
 /* User sign up using email and password
 Also hashing the password before storage */
 const signUp = async (req, res) => {
     try {
         const pass = await bcrypt.hash(req.body.password, 8)
-        let user = await User.create({
+        let user = await models.User.create({
             email: req.body.email,
             password: pass,
             user_type: req.body.type,
@@ -23,11 +21,11 @@ const signUp = async (req, res) => {
             console.log(user)
             console.log(user.user_id)
             if (req.body.type == 0)
-                await Client.create({
+                await models.Client.create({
                     user_id: user.user_id
                 })
             else
-                await Provider.create({
+                await models.Provider.create({
                     user_id: user.user_id
                 })
             return res.status(201).json({
@@ -50,7 +48,7 @@ const signUp = async (req, res) => {
 /* User sign in using email and password 
 Using bcrypt to compare passwords */
 const signIn = (req, res) => {
-    User.findOne({
+    models.User.findOne({
         where: {
             email: req.body.email
         },

@@ -1,19 +1,19 @@
-const Client = require('../models/client')
-const Provider = require('../models/provider')
-const User = require('../models/user')
+const { Op } = require('sequelize')
+
+const models = require('../models/models')
 
 const fetchAllProviders = async (req, res) => {
     try {
-        let data = await Provider.findAll({
+        let data = await models.Provider.findAll({
             include: [
                 {
-                    model: User,
+                    model: models.User,
                     attributes: ['name', 'phone', 'email']
                 }
             ],
             logging: false
         })
-        console.log(data)
+        // console.log(data)
         return res.status(200).json({
             message: 'OK',
             data: data
@@ -24,4 +24,31 @@ const fetchAllProviders = async (req, res) => {
     }
 }
 
-module.exports = { fetchAllProviders }
+const searchForProviders = async (req, res) => {
+    try {
+        let search = req.body.search
+        let result = await models.Provider.findAll({
+            include: [
+                {
+                    model: models.User,
+                    attributes: ['name', 'phone', 'email'],
+                    where: {
+                        name: {
+                            [Op.like]: `%${search}%`
+                        }
+                    }
+                }
+            ],
+            logging: false
+        })
+        return res.status(200).json({
+            message: 'OK',
+            data: result
+        })
+    } catch (ex) {
+        console.log(ex)
+        return res.sendStatus(404)
+    }
+}
+
+module.exports = { fetchAllProviders, searchForProviders }

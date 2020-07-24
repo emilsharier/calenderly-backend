@@ -1,7 +1,7 @@
-const User = require('../models/user')
+const models = require('../models/models')
 
 const checkForDuplicateEntry = (req, res, next) => {
-    User.findOne({
+    models.User.findOne({
         where: {
             email: req.body.email
         },

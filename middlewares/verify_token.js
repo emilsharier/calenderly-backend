@@ -1,7 +1,5 @@
 const jwt = require('jsonwebtoken')
 const config = require('../config/jwt_config')
-const sequelize = require('../ORM/sequelize')
-const User = require('../models/user')
 
 const verifyToken = async (req, res, next) => {
     let token = req.headers['x-access-token']
@@ -17,7 +15,8 @@ const verifyToken = async (req, res, next) => {
                     message: 'Unauthorized!'
                 })
             }
-            req.user_id = decoded.user_id
+            // console.log('Verified')
+            // req.user_id = decoded.user_id
             next()
         })
     }

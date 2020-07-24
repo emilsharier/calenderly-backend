@@ -1,10 +1,10 @@
-const User = require('../models/user')
+const models = require('../models/models')
 
 const verifyEmail = async (req, res, next) => {
     let user_email = req.headers['user-email']
 
     try {
-        let data = User.findOne({
+        let data = models.User.findOne({
             where: {
                 email: user_email
             }

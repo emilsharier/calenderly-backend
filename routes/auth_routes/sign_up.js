@@ -1,7 +1,8 @@
-const checkForDuplicates = require(`${__base}/middlewares/check_duplicates`)
-const controller = require(`${__base}/controllers/auth_controller`)
+const middlewares = require(`../../middlewares/middlewares`)
+const controller = require(`../../controllers/controllers`)
+
 const router = require('express').Router()
 
-router.post('/', [checkForDuplicates], controller.signUp)
+router.post('/', [middlewares.checkForDuplicates], controller.AuthController.signUp)
 
 module.exports = router

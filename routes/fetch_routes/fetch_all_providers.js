@@ -1,6 +1,7 @@
-const controller = require('../../controllers/fetch_controller')
+const controller = require('../../controllers/controllers')
 const router = require('express').Router()
+const middlewares = require('../../middlewares/middlewares')
 
-router.get('/', controller.fetchAllProviders)
+router.post('/', [middlewares.verifyToken], controller.FetchController.fetchAllProviders)
 
 module.exports = router
