@@ -5,11 +5,12 @@ const constant = require('../constants/constants')
 const Client = sequelize.define(constant.clientTableName, {
     client_id: {
         type: DataTypes.INTEGER,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
     },
     user_id: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
     }
 })
 

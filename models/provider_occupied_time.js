@@ -13,4 +13,4 @@ const ProviderOccupiedTime = sequelize.define(constant.providerOccupiedTimeTable
     }
 })
 
-module.exports = Client
+module.exports = ProviderOccupiedTime

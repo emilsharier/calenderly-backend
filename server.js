@@ -17,6 +17,9 @@ app.use(express.urlencoded({ extended: true }))
 // Database init
 require('./ORM/init')()
 
+// Express app loader
+require('./routes/index')(app)
+
 // Server
 app.listen(PORT, () => {
     console.log(`Server up and running at ${PORT}`)
