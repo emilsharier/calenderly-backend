@@ -1,0 +1,29 @@
+{
+  "name": "calenderly-backend",
+  "version": "1.0.0",
+  "description": "Backend API for Calenderly app (Express API)",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emilsharier/calenderly-backend.git"
+  },
+  "author": "Emil Sharier",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/emilsharier/calenderly-backend/issues"
+  },
+  "homepage": "https://github.com/emilsharier/calenderly-backend#readme",
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "nodemon": "^2.0.4"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "pg": "^8.3.0",
+    "sequelize": "^6.3.3"
+  }
+}
