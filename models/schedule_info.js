@@ -1,6 +1,7 @@
 const sequelize = require('../ORM/sequelize')
 const { DataTypes } = require('sequelize')
 const constant = require('../constants/constants')
+const User = require('./user')
 
 const ScheduleInfo = sequelize.define(constant.scheduleInfoTableName, {
     schedule_id: {
@@ -33,6 +34,10 @@ const ScheduleInfo = sequelize.define(constant.scheduleInfoTableName, {
         type: DataTypes.DATE,
         allowNull: false
     }
+})
+
+ScheduleInfo.hasMany(User, {
+    foreignKey: 'user_id'
 })
 
 module.exports = ScheduleInfo

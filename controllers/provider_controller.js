@@ -6,7 +6,6 @@ const changeProviderOccupiedTime = async (req, res) => {
     const endTime = req.body.end_time
     const date = req.body.date
     const providerId = req.body.provider_id
-    // const userId = req.body.user_id
 
     try {
         let result = await models.ProviderOccupiedTime.findAndCountAll({

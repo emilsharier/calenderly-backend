@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const config = require('../config/jwt_config')
+const { Op } = require('sequelize')
 // const mail = require('../controllers/mail_controller')
 
 const models = require('../models/models')
@@ -18,17 +19,17 @@ const signUp = async (req, res) => {
             phone: req.body.phone,
         })
         if (user) {
-            console.log(user)
-            console.log(user.user_id)
-            if (req.body.type == 0)
-                await models.Client.create({
-                    user_id: user.user_id
-                })
-            else
-                await models.Provider.create({
-                    user_id: user.user_id
-                })
-            return res.status(201).json({
+            // console.log(user)
+            // console.log(user.user_id)
+            // if (req.body.type == 0)
+            //     await models.Client.create({
+            //         user_id: user.user_id
+            //     })
+            // else
+            //     await models.Provider.create({
+            //         user_id: user.user_id
+            //     })
+            return res.status(200).json({
                 message: 'Registration complete!'
             })
         } else {
@@ -47,13 +48,14 @@ const signUp = async (req, res) => {
 
 /* User sign in using email and password 
 Using bcrypt to compare passwords */
-const signIn = (req, res) => {
-    models.User.findOne({
-        where: {
-            email: req.body.email
-        },
-        logging: false
-    }).then(user => {
+const signIn = async (req, res) => {
+    try {
+        let user = await models.User.findOne({
+            where: {
+                email: req.body.email
+            },
+            logging: false
+        })
         if (user) {
             let passwordStatus = bcrypt.compareSync(
                 req.body.password, user.password
@@ -80,7 +82,10 @@ const signIn = (req, res) => {
                 message: 'No such user found'
             })
         }
-    })
+    } catch (ex) {
+        console.log(ex)
+        return res.sendStatus(404)
+    }
 }
 
 const resetPassword = async (req, res) => {
