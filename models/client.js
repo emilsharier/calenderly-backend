@@ -1,6 +1,7 @@
 const sequelize = require('../ORM/sequelize')
 const { DataTypes } = require('sequelize')
 const constant = require('../constants/constants')
+const User = require('./user')
 
 const Client = sequelize.define(constant.clientTableName, {
     client_id: {
@@ -12,6 +13,10 @@ const Client = sequelize.define(constant.clientTableName, {
         type: DataTypes.INTEGER,
         allowNull: false,
     }
+})
+
+Client.hasMany(User, {
+    foreignKey: 'user_id'
 })
 
 module.exports = Client
