@@ -27,11 +27,11 @@ const ScheduleInfo = sequelize.define(constant.scheduleInfoTableName, {
         allowNull: false
     },
     start_time: {
-        type: DataTypes.DATE,
+        type: DataTypes.TIME,
         allowNull: false
     },
     end_time: {
-        type: DataTypes.DATE,
+        type: DataTypes.TIME,
         allowNull: false
     }
 })

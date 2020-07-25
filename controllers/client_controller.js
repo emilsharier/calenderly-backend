@@ -11,28 +11,54 @@ const bookSchedule = async (req, res) => {
     const endTime = req.body.end_time
 
     const parsedStartTime = Date.parse(date + ' ' + req.body.start_time)
-    
+
     try {
-        let result = await models.ProviderOccupiedTime.findAll({
-            where: {
-                date: {
-                    [Op.eq]: date
+        let result
+        let [result1, result2] = await Promise.all([
+            models.ProviderOccupiedTime.findAll({
+                where: {
+                    date: {
+                        [Op.eq]: date
+                    },
+                    provider_id: {
+                        [Op.eq]: providerId
+                    }
                 },
-                provider_id: {
-                    [Op.eq]: provider_id
-                }
-            },
-            logging: false
-        })
-        let occupiedStartTime = Date.parse(result[0].date + ' ' + result[0 ].occupied_time_start)
-        if (parsedStartTime < occupiedStartTime) {
+                logging: false
+            }), models.ScheduleInfo.findAll({
+                where: {
+                    client_id: {
+                        [Op.eq]: userId
+                    }
+                },
+                logging: false
+            })
+        ])
+        let flag = true
+        let length = result2.length
+        for (let i = 0; i < length; i++) {
+            if (startTime == result2[i].start_time) {
+                flag = false
+                break
+            }
+        }
+        let occupiedStartTime = Date.parse(result1[0].date + ' ' + result1[0].occupied_time_start)
+        if (!flag) {
+            return res.status(403).json({
+                message: 'Schedule mismatch',
+                data: 'You have other schedules lined up at this time period'
+            })
+        }
+        else if (parsedStartTime < occupiedStartTime) {
             result = await models.ScheduleInfo.create({
                 description: description,
-                user_id: userId,
+                client_id: userId,
                 provider_id: providerId,
                 date: date,
                 start_time: startTime,
-                end_time: endTime 
+                end_time: endTime
+            }, {
+                logging: false
             })
             return res.status(200).json({
                 message: 'OK',
