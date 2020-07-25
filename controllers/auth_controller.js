@@ -19,16 +19,6 @@ const signUp = async (req, res) => {
             phone: req.body.phone,
         })
         if (user) {
-            // console.log(user)
-            // console.log(user.user_id)
-            // if (req.body.type == 0)
-            //     await models.Client.create({
-            //         user_id: user.user_id
-            //     })
-            // else
-            //     await models.Provider.create({
-            //         user_id: user.user_id
-            //     })
             return res.status(200).json({
                 message: 'Registration complete!'
             })
