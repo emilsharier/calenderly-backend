@@ -11,6 +11,11 @@ The API is built using the following tech stack:
 ## NOTE
 
 This application is built as a part of 'Amrita University - Campus hiring 21' by Navigus.
+This application is hosted in Heroku. You can find it here : https://calenderly-backend.herokuapp.com/ (This is just the API! GUI is a mobile application)
+
+## Postman collection
+
+    https://www.getpostman.com/collections/595cf7c9000a9e3bea6a
 
 ## Authentication
 
@@ -69,7 +74,7 @@ The following commands will get you started with building and deploying your pro
 
 Also if you're running the project locally make sure to create a .env file which contains the local DATABASE_URL
 
-## Things/Features left out
+## Future enhancements
 
 Features that I had initally planned on implementing but couldn't finish because of the time constraint.
 
