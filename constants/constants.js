@@ -1,4 +1,4 @@
-const userTableName = 'user'
+const userTableName = 'user_data'
 const scheduleInfoTableName = 'schedule_info'
 const clientTableName = 'client'
 const providerTableName = 'provider'
