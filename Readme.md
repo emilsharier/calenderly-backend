@@ -25,9 +25,15 @@ This project is hosted in heroku and the database used is PostgreSQL. The reason
 
 ## Architecture
 
+![Calenderly architecture](assets/architecture.jpg)
+
 ## System design
 
+![Calenderly system design](assets/system_design.jpg)
+
 ## DFD
+
+![Level 1 DFD](assets/level_1_dfd.jpg)
 
 ## Endpoints
 
