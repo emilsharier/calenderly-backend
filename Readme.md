@@ -6,7 +6,7 @@ The API is built using the following tech stack:
     NodeJs
     Express API
     Sequelize
-    PostgerSQL
+    PostgreSQL
 
 ## NOTE
 
