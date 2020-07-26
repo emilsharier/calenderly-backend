@@ -20,36 +20,36 @@ const fetchAllProviders = async (req, res) => {
         })
     } catch (ex) {
         console.error(ex)
-        throw ex
+        return res.sendState(404)
     }
 }
 
-const searchForProviders = async (req, res) => {
-    try {
-        let search = req.body.search
-        let result = await models.Provider.findAll({
-            include: [
-                {
-                    model: models.User,
-                    attributes: ['name', 'phone', 'email'],
-                    where: {
-                        name: {
-                            [Op.like]: `%${search}%`
-                        }
-                    }
-                }
-            ],
-            logging: false
-        })
-        return res.status(200).json({
-            message: 'OK',
-            data: result
-        })
-    } catch (ex) {
-        console.log(ex)
-        return res.sendStatus(404)
-    }
-}
+// const searchForProviders = async (req, res) => {
+//     try {
+//         let search = req.body.search
+//         let result = await models.Provider.findAll({
+//             include: [
+//                 {
+//                     model: models.User,
+//                     attributes: ['name', 'phone', 'email'],
+//                     where: {
+//                         name: {
+//                             [Op.like]: `%${search}%`
+//                         }
+//                     }
+//                 }
+//             ],
+//             logging: false
+//         })
+//         return res.status(200).json({
+//             message: 'OK',
+//             data: result
+//         })
+//     } catch (ex) {
+//         console.log(ex)
+//         return res.sendStatus(404)
+//     }
+// }
 
 const fetchLiveSchedules = async (req, res) => {
     try {
@@ -77,4 +77,4 @@ const fetchLiveSchedules = async (req, res) => {
     }
 }
 
-module.exports = { fetchAllProviders, searchForProviders, fetchLiveSchedules }
+module.exports = { fetchAllProviders, fetchLiveSchedules }

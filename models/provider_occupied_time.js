@@ -22,8 +22,8 @@ const ProviderOccupiedTime = sequelize.define(constant.providerOccupiedTimeTable
     }
 })
 
-ProviderOccupiedTime.hasMany(User, {
-    foreignKey: 'user_id'
-})
+// ProviderOccupiedTime.hasMany(User, {
+//     foreignKey: 'user_id'
+// })
 
 module.exports = ProviderOccupiedTime

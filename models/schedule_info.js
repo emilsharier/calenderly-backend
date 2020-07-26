@@ -37,7 +37,7 @@ const ScheduleInfo = sequelize.define(constant.scheduleInfoTableName, {
 })
 
 ScheduleInfo.hasMany(User, {
-    foreignKey: 'user_id'
+    // foreignKey: 'user_id'
 })
 
 module.exports = ScheduleInfo
